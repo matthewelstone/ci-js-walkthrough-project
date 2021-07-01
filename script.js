@@ -12,10 +12,19 @@ document.addEventListener("DOMContentLoaded", function(){
       }
     }) 
   }
+document.getElementById("answer-box").addEventListener("keydown", function(event){
+  if(event.key === "Enter"){
+    checkAnswer();
+  }
+})
+
   runGame("addition");
 })
 
 function runGame(gameType){
+
+  document.getElementById("answer-box").value = "";
+  document.getElementById("answer-box").focus();
 
 let num1 = Math.floor(Math.random() * 25) + 1;
 let num2 = Math.floor(Math.random() * 25) + 1;
@@ -68,7 +77,7 @@ function calculateCorrectAnswer(){
   }else if(operator === "x"){
     return [operand1 * operand2, "multiply"]
   }else if(operator === "/"){
-    return [operand1 / operand2, "division"]
+    return [Math.floor(operand1 / operand2), "division"]
   }
 else {
     alert(`Unimplimented operator ${operator}`);
@@ -116,9 +125,10 @@ function displayMultiplyQuestion(operand1, operand2){
 }
 
 function displayDivisionQuestion(operand1, operand2){
+  operand1 = operand1 *operand2;
 
-  document.getElementById("operand1").textContent = operand1 > operand2 ? operand1 : operand2;
-  document.getElementById("operand2").textContent = operand1 > operand2 ? operand2 : operand1;
-  document.getElementById("operator").textContent = "/";
+	document.getElementById("operand1").textContent = operand1;
+	document.getElementById("operand2").textContent =operand2;
+	document.getElementById("operator").textContent = "/";
 
 }
